@@ -6,12 +6,17 @@ from libraries.csv_loader import CsvLoader
 
 class TestCsvLoader(unittest.TestCase):
     def test_constructor(self):
-        directory = './data'
-        files = {
-            'games_csv': csv.DictReader(open(os.path.join(directory, 'games.csv'))),
-            'game_teams_csv': csv.DictReader(open(os.path.join(directory, 'game_teams.csv'))),
-            'teams_csv': csv.DictReader(open(os.path.join(directory, 'teams.csv')))
+        csvs = {
+            'games_csv': csv.DictReader(open('./data/games.csv')),
+            'game_teams_csv': csv.DictReader(open('./data/game_teams.csv')),
+            'teams_csv': csv.DictReader(open('./data/teams.csv'))
         }
-        csv_loader = CsvLoader(files)
+        csv_loader = CsvLoader(csvs)
 
         self.assertIsInstance(csv_loader, CsvLoader)
+        self.assertIsInstance(csv_loader.all_teams, list)
+        self.assertIsInstance(csv_loader.all_games, list)
+        self.assertIsInstance(csv_loader.all_game_teams, list)
+        self.assertEqual(len(csv_loader.all_teams), 32)
+        self.assertEqual(len(csv_loader.all_games), 7441)
+        self.assertEqual(len(csv_loader.all_game_teams), 14882)
