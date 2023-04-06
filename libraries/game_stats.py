@@ -1,10 +1,15 @@
 import csv
 import os
-from libraries.csv_loader import CsvLoader
 import pdb
 
 
-class Gamestats(CsvLoader):
+class GameStats():
+    def __init__(self):
+        file = {'games_csv': csv.DictReader(open('./data/games.csv'))}
+        self.all_games = []
+
+        for row in file['games_csv']:
+            self.all_games.append(row)
 
     def highest_total_score(self):
         max_score = 0

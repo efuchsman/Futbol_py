@@ -26,8 +26,3 @@ class CsvLoader:
             'teams_csv': csv.DictReader(open(os.path.join(directory, 'teams.csv')))
         }
         return cls(files)
-
-
-# csv_directory = './data'
-# csv_loader = CsvLoader.from_csv_directory(csv_directory)
-# print(csv_loader.all_teams)
