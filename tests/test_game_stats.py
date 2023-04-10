@@ -22,3 +22,21 @@ class TestGameStats(unittest.TestCase):
         game_stats = GameStats()
 
         self.assertEqual(game_stats.lowest_total_score(), 0)
+
+    def test_percentage_home_wins(self):
+
+        game_stats = GameStats()
+
+        self.assertEqual(game_stats.percentage_home_wins(), 0.44)
+
+    def test_percentage_visitor_wins(self):
+
+        game_stats = GameStats()
+
+        self.assertEqual(game_stats.percentage_visitor_wins(), 0.36)
+
+    def test_percentage_ties(self):
+
+        game_stats = GameStats()
+
+        self.assertEqual(game_stats.percentage_ties(), 0.20)
