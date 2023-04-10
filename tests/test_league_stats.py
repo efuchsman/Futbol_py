@@ -18,7 +18,11 @@ class TestLeagueStats(unittest.TestCase):
         self.assertEqual(league_stats.count_of_teams(), 32)
 
     def test_best_offense(self):
-
         league_stats = LeagueStats()
 
         self.assertEqual(league_stats.best_offense(), "Reign FC")
+
+    def test_worst_offense(self):
+        league_stats = LeagueStats()
+
+        self.assertEqual(league_stats.worst_offense(), "Utah Royals FC")
