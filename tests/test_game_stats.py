@@ -16,3 +16,9 @@ class TestGameStats(unittest.TestCase):
         game_stats = GameStats()
 
         self.assertEqual(game_stats.highest_total_score(), 11)
+
+    def test_lowest_total_score(self):
+
+        game_stats = GameStats()
+
+        self.assertEqual(game_stats.lowest_total_score(), 0)
