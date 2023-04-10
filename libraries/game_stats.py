@@ -1,4 +1,6 @@
 import csv
+from collections import defaultdict
+import pdb
 
 
 class GameStats():
@@ -55,3 +57,36 @@ class GameStats():
                 ties += 1
 
         return round((float(ties) / float(total_games)), 2)
+
+    def count_of_games_by_season(self):
+        season_games_hash = defaultdict(int)
+
+        for game in self.all_games:
+            season_games_hash[game['season']] += 1
+
+        return season_games_hash
+
+    def average_goals_per_game(self):
+        total_games = 0
+        total_goals = 0
+
+        for game in self.all_games:
+            total_games += 1
+            total_goals += int(game['away_goals']) + int(game['home_goals'])
+
+        return round((float(total_goals) / float(total_games)), 2)
+
+    def average_goals_by_season(self):
+        season_goals_hash = defaultdict(int)
+        season_games_hash = defaultdict(int)
+        avg_goals_hash = defaultdict(int)
+
+        for game in self.all_games:
+            season_goals_hash[game['season']
+                              ] += (int(game['away_goals']) + int(game['home_goals']))
+            season_games_hash[game['season']] += 1
+
+        for season in season_goals_hash:
+            avg_goals_hash[season] += round(
+                (float(season_goals_hash[season]) / float(season_games_hash[season])), 2)
+        return avg_goals_hash
