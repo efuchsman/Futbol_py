@@ -26,3 +26,27 @@ class TestLeagueStats(unittest.TestCase):
         league_stats = LeagueStats()
 
         self.assertEqual(league_stats.worst_offense(), "Utah Royals FC")
+
+    def test_highest_scoring_visitor(self):
+        league_stats = LeagueStats()
+
+        self.assertEqual(
+            league_stats.highest_scoring_visitor(), "FC Dallas")
+
+    def test_highest_scoring_home_team(self):
+        league_stats = LeagueStats()
+
+        self.assertEqual(
+            league_stats.highest_scoring_home_team(), "Reign FC")
+
+    def test_lowest_scoring_visitor(self):
+        league_stats = LeagueStats()
+
+        self.assertEqual(
+            league_stats.lowest_scoring_visitor(), "San Jose Earthquakes")
+
+    def test_lowest_scoring_home_team(self):
+        league_stats = LeagueStats()
+
+        self.assertEqual(
+            league_stats.lowest_scoring_home_team(), "Utah Royals FC")

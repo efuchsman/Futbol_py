@@ -73,3 +73,111 @@ class LeagueStats():
         for team in avg_goals_game_hash:
             if avg_goals_game_hash[team] == worst_avg:
                 return team
+
+    def highest_scoring_visitor(self):
+        visitor_goals_hash = defaultdict(int)
+        team_game_count_hash = defaultdict(int)
+        avg_goals_game_hash = defaultdict(int)
+        teams_hash = defaultdict(str)
+
+        for team in self.all_teams:
+            teams_hash[team['team_id']] += team['teamName']
+
+        for game in self.all_game_teams:
+            if game['HoA'] == "away":
+                visitor_goals_hash[game['team_id']] += int(game['goals'])
+                team_game_count_hash[game['team_id']] += 1
+
+        for team in visitor_goals_hash:
+            avg_goals_game_hash[team] += round(
+                (float(visitor_goals_hash[team])/float(team_game_count_hash[team])), 2)
+
+        best_avg = 0
+
+        for team in avg_goals_game_hash:
+            best_avg = max(best_avg, avg_goals_game_hash[team])
+
+        for team in avg_goals_game_hash:
+            if avg_goals_game_hash[team] == best_avg:
+                return teams_hash[team]
+
+    def highest_scoring_home_team(self):
+        home_goals_hash = defaultdict(int)
+        team_game_count_hash = defaultdict(int)
+        avg_goals_game_hash = defaultdict(int)
+        teams_hash = defaultdict(str)
+
+        for team in self.all_teams:
+            teams_hash[team['team_id']] += team['teamName']
+
+        for game in self.all_game_teams:
+            if game['HoA'] == "home":
+                home_goals_hash[game['team_id']] += int(game['goals'])
+                team_game_count_hash[game['team_id']] += 1
+
+        for team in home_goals_hash:
+            avg_goals_game_hash[team] += round(
+                (float(home_goals_hash[team])/float(team_game_count_hash[team])), 2)
+
+        best_avg = 0
+
+        for team in avg_goals_game_hash:
+            best_avg = max(best_avg, avg_goals_game_hash[team])
+
+        for team in avg_goals_game_hash:
+            if avg_goals_game_hash[team] == best_avg:
+                return teams_hash[team]
+
+    def lowest_scoring_visitor(self):
+        visitor_goals_hash = defaultdict(int)
+        team_game_count_hash = defaultdict(int)
+        avg_goals_game_hash = defaultdict(int)
+        teams_hash = defaultdict(str)
+
+        for team in self.all_teams:
+            teams_hash[team['team_id']] += team['teamName']
+
+        for game in self.all_game_teams:
+            if game['HoA'] == "away":
+                visitor_goals_hash[game['team_id']] += int(game['goals'])
+                team_game_count_hash[game['team_id']] += 1
+
+        for team in visitor_goals_hash:
+            avg_goals_game_hash[team] += round(
+                (float(visitor_goals_hash[team])/float(team_game_count_hash[team])), 2)
+
+        lowest_avg = 100
+
+        for team in avg_goals_game_hash:
+            lowest_avg = min(lowest_avg, avg_goals_game_hash[team])
+
+        for team in avg_goals_game_hash:
+            if avg_goals_game_hash[team] == lowest_avg:
+                return teams_hash[team]
+
+    def lowest_scoring_home_team(self):
+        home_goals_hash = defaultdict(int)
+        team_game_count_hash = defaultdict(int)
+        avg_goals_game_hash = defaultdict(int)
+        teams_hash = defaultdict(str)
+
+        for team in self.all_teams:
+            teams_hash[team['team_id']] += team['teamName']
+
+        for game in self.all_game_teams:
+            if game['HoA'] == "home":
+                home_goals_hash[game['team_id']] += int(game['goals'])
+                team_game_count_hash[game['team_id']] += 1
+
+        for team in home_goals_hash:
+            avg_goals_game_hash[team] += round(
+                (float(home_goals_hash[team])/float(team_game_count_hash[team])), 2)
+
+        lowest_avg = 100
+
+        for team in avg_goals_game_hash:
+            lowest_avg = min(lowest_avg, avg_goals_game_hash[team])
+
+        for team in avg_goals_game_hash:
+            if avg_goals_game_hash[team] == lowest_avg:
+                return teams_hash[team]
