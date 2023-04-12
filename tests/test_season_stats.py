@@ -29,3 +29,12 @@ class TestSeasonStats(unittest.TestCase):
 
         self.assertEqual(season_stats.most_accurate_team(
             "20142015"), "Toronto FC")
+
+    def test_least_accurate_team(self):
+        season_stats = SeasonStats()
+
+        self.assertEqual(season_stats.least_accurate_team(
+            "20132014"), "New York City FC")
+
+        self.assertEqual(season_stats.least_accurate_team(
+            "20142015"), "Columbus Crew SC")
