@@ -12,6 +12,10 @@ class LeagueStats():
 
         self.all_game_teams = []
         self.all_teams = []
+        self.teams_hash = defaultdict(str)
+        self.team_goals_hash = defaultdict(int)
+        self.team_game_count_hash = defaultdict(int)
+        self.avg_goals_game_hash = defaultdict(int)
 
         for row in game_teams_file['game_teams_csv']:
             self.all_game_teams.append(row)
@@ -19,165 +23,132 @@ class LeagueStats():
         for row in teams_file['teams_csv']:
             self.all_teams.append(row)
 
+        for team in self.all_teams:
+            self.teams_hash[team['team_id']] += team['teamName']
+
     def count_of_teams(self):
         return len(self.all_teams)
 
     def best_offense(self):
-        teams_hash = defaultdict(str)
-        team_goals_hash = defaultdict(int)
-        team_game_count_hash = defaultdict(int)
-        avg_goals_game_hash = defaultdict(int)
-
-        for team in self.all_teams:
-            teams_hash[team['team_id']] += team['teamName']
 
         for game in self.all_game_teams:
-            team_goals_hash[teams_hash[game['team_id']]] += int(game['goals'])
-            team_game_count_hash[teams_hash[game['team_id']]] += 1
+            self.team_goals_hash[self.teams_hash[game['team_id']]
+                                 ] += int(game['goals'])
+            self.team_game_count_hash[self.teams_hash[game['team_id']]] += 1
 
-        for team in team_goals_hash:
-            avg_goals_game_hash[team] += round(
-                (float(team_goals_hash[team])/float(team_game_count_hash[team])), 2)
+        for team in self.team_goals_hash:
+            self.avg_goals_game_hash[team] += round(
+                (float(self.team_goals_hash[team])/float(self.team_game_count_hash[team])), 2)
 
         best_avg = 0
 
-        for team in avg_goals_game_hash:
-            best_avg = max(best_avg, avg_goals_game_hash[team])
+        for team in self.avg_goals_game_hash:
+            best_avg = max(best_avg, self.avg_goals_game_hash[team])
 
-        for team in avg_goals_game_hash:
-            if avg_goals_game_hash[team] == best_avg:
+        for team in self.avg_goals_game_hash:
+            if self.avg_goals_game_hash[team] == best_avg:
                 return team
 
     def worst_offense(self):
-        teams_hash = defaultdict(str)
-        team_goals_hash = defaultdict(int)
-        team_game_count_hash = defaultdict(int)
-        avg_goals_game_hash = defaultdict(int)
-
-        for team in self.all_teams:
-            teams_hash[team['team_id']] += team['teamName']
 
         for game in self.all_game_teams:
-            team_goals_hash[teams_hash[game['team_id']]] += int(game['goals'])
-            team_game_count_hash[teams_hash[game['team_id']]] += 1
+            self.team_goals_hash[self.teams_hash[game['team_id']]
+                                 ] += int(game['goals'])
+            self.team_game_count_hash[self.teams_hash[game['team_id']]] += 1
 
-        for team in team_goals_hash:
-            avg_goals_game_hash[team] += round(
-                (float(team_goals_hash[team])/float(team_game_count_hash[team])), 2)
+        for team in self.team_goals_hash:
+            self.avg_goals_game_hash[team] += round(
+                (float(self.team_goals_hash[team])/float(self.team_game_count_hash[team])), 2)
 
         worst_avg = 5
 
-        for team in avg_goals_game_hash:
-            worst_avg = min(worst_avg, avg_goals_game_hash[team])
+        for team in self.avg_goals_game_hash:
+            worst_avg = min(worst_avg, self.avg_goals_game_hash[team])
 
-        for team in avg_goals_game_hash:
-            if avg_goals_game_hash[team] == worst_avg:
+        for team in self.avg_goals_game_hash:
+            if self.avg_goals_game_hash[team] == worst_avg:
                 return team
 
     def highest_scoring_visitor(self):
         visitor_goals_hash = defaultdict(int)
-        team_game_count_hash = defaultdict(int)
-        avg_goals_game_hash = defaultdict(int)
-        teams_hash = defaultdict(str)
-
-        for team in self.all_teams:
-            teams_hash[team['team_id']] += team['teamName']
 
         for game in self.all_game_teams:
             if game['HoA'] == "away":
                 visitor_goals_hash[game['team_id']] += int(game['goals'])
-                team_game_count_hash[game['team_id']] += 1
+                self.team_game_count_hash[game['team_id']] += 1
 
         for team in visitor_goals_hash:
-            avg_goals_game_hash[team] += round(
-                (float(visitor_goals_hash[team])/float(team_game_count_hash[team])), 2)
+            self.avg_goals_game_hash[team] += round(
+                (float(visitor_goals_hash[team])/float(self.team_game_count_hash[team])), 2)
 
         best_avg = 0
 
-        for team in avg_goals_game_hash:
-            best_avg = max(best_avg, avg_goals_game_hash[team])
+        for team in self.avg_goals_game_hash:
+            best_avg = max(best_avg, self.avg_goals_game_hash[team])
 
-        for team in avg_goals_game_hash:
-            if avg_goals_game_hash[team] == best_avg:
-                return teams_hash[team]
+        for team in self.avg_goals_game_hash:
+            if self.avg_goals_game_hash[team] == best_avg:
+                return self.teams_hash[team]
 
     def highest_scoring_home_team(self):
         home_goals_hash = defaultdict(int)
-        team_game_count_hash = defaultdict(int)
-        avg_goals_game_hash = defaultdict(int)
-        teams_hash = defaultdict(str)
-
-        for team in self.all_teams:
-            teams_hash[team['team_id']] += team['teamName']
 
         for game in self.all_game_teams:
             if game['HoA'] == "home":
                 home_goals_hash[game['team_id']] += int(game['goals'])
-                team_game_count_hash[game['team_id']] += 1
+                self.team_game_count_hash[game['team_id']] += 1
 
         for team in home_goals_hash:
-            avg_goals_game_hash[team] += round(
-                (float(home_goals_hash[team])/float(team_game_count_hash[team])), 2)
+            self.avg_goals_game_hash[team] += round(
+                (float(home_goals_hash[team])/float(self.team_game_count_hash[team])), 2)
 
         best_avg = 0
 
-        for team in avg_goals_game_hash:
-            best_avg = max(best_avg, avg_goals_game_hash[team])
+        for team in self.avg_goals_game_hash:
+            best_avg = max(best_avg, self.avg_goals_game_hash[team])
 
-        for team in avg_goals_game_hash:
-            if avg_goals_game_hash[team] == best_avg:
-                return teams_hash[team]
+        for team in self.avg_goals_game_hash:
+            if self.avg_goals_game_hash[team] == best_avg:
+                return self.teams_hash[team]
 
     def lowest_scoring_visitor(self):
         visitor_goals_hash = defaultdict(int)
-        team_game_count_hash = defaultdict(int)
-        avg_goals_game_hash = defaultdict(int)
-        teams_hash = defaultdict(str)
-
-        for team in self.all_teams:
-            teams_hash[team['team_id']] += team['teamName']
 
         for game in self.all_game_teams:
             if game['HoA'] == "away":
                 visitor_goals_hash[game['team_id']] += int(game['goals'])
-                team_game_count_hash[game['team_id']] += 1
+                self.team_game_count_hash[game['team_id']] += 1
 
         for team in visitor_goals_hash:
-            avg_goals_game_hash[team] += round(
-                (float(visitor_goals_hash[team])/float(team_game_count_hash[team])), 2)
+            self.avg_goals_game_hash[team] += round(
+                (float(visitor_goals_hash[team])/float(self.team_game_count_hash[team])), 2)
 
         lowest_avg = 100
 
-        for team in avg_goals_game_hash:
-            lowest_avg = min(lowest_avg, avg_goals_game_hash[team])
+        for team in self.avg_goals_game_hash:
+            lowest_avg = min(lowest_avg, self.avg_goals_game_hash[team])
 
-        for team in avg_goals_game_hash:
-            if avg_goals_game_hash[team] == lowest_avg:
-                return teams_hash[team]
+        for team in self.avg_goals_game_hash:
+            if self.avg_goals_game_hash[team] == lowest_avg:
+                return self.teams_hash[team]
 
     def lowest_scoring_home_team(self):
-        home_goals_hash = defaultdict(int)
-        team_game_count_hash = defaultdict(int)
-        avg_goals_game_hash = defaultdict(int)
-        teams_hash = defaultdict(str)
-
-        for team in self.all_teams:
-            teams_hash[team['team_id']] += team['teamName']
+        visitor_goals_hash = defaultdict(int)
 
         for game in self.all_game_teams:
             if game['HoA'] == "home":
-                home_goals_hash[game['team_id']] += int(game['goals'])
-                team_game_count_hash[game['team_id']] += 1
+                visitor_goals_hash[game['team_id']] += int(game['goals'])
+                self.team_game_count_hash[game['team_id']] += 1
 
-        for team in home_goals_hash:
-            avg_goals_game_hash[team] += round(
-                (float(home_goals_hash[team])/float(team_game_count_hash[team])), 2)
+        for team in visitor_goals_hash:
+            self.avg_goals_game_hash[team] += round(
+                (float(visitor_goals_hash[team])/float(self.team_game_count_hash[team])), 2)
 
         lowest_avg = 100
 
-        for team in avg_goals_game_hash:
-            lowest_avg = min(lowest_avg, avg_goals_game_hash[team])
+        for team in self.avg_goals_game_hash:
+            lowest_avg = min(lowest_avg, self.avg_goals_game_hash[team])
 
-        for team in avg_goals_game_hash:
-            if avg_goals_game_hash[team] == lowest_avg:
-                return teams_hash[team]
+        for team in self.avg_goals_game_hash:
+            if self.avg_goals_game_hash[team] == lowest_avg:
+                return self.teams_hash[team]

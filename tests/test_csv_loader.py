@@ -1,6 +1,5 @@
 import unittest
 import csv
-import os
 from libraries.csv_loader import CsvLoader
 
 
