@@ -38,3 +38,12 @@ class TestSeasonStats(unittest.TestCase):
 
         self.assertEqual(season_stats.least_accurate_team(
             "20142015"), "Columbus Crew SC")
+
+    def test_most_tackles(self):
+        season_stats = SeasonStats()
+
+        self.assertEqual(season_stats.most_tackles(
+            "20132014"), "FC Cincinnati")
+
+        self.assertEqual(season_stats.most_tackles(
+            "20142015"), "Seattle Sounders FC")

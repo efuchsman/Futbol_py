@@ -161,3 +161,34 @@ class SeasonStats(LeagueStats, GameStats):
         for team in league_stats.all_teams:
             if team['team_id'] == bottom_accurate_team:
                 return team['teamName']
+
+    def most_tackles(self, season_id):
+        game_stats = GameStats()
+        league_stats = LeagueStats()
+        team_season_tackle_hash = defaultdict(int)
+
+        season_id_games = []
+
+        for game in game_stats.all_games:
+            if game['season'] == season_id:
+                season_id_games.append(game['game_id'])
+        for id in season_id_games:
+            for game_team in league_stats.all_game_teams:
+                if game_team['game_id'] == id:
+                    team_season_tackle_hash[game_team['team_id']
+                                            ] += int(game_team['tackles'])
+
+        max_tackles = 0
+
+        for team in team_season_tackle_hash:
+            max_tackles = max(max_tackles, team_season_tackle_hash[team])
+
+        top_accurate_team = ""
+
+        for team in team_season_tackle_hash:
+            if team_season_tackle_hash[team] == max_tackles:
+                top_accurate_team += team
+
+        for team in league_stats.all_teams:
+            if team['team_id'] == top_accurate_team:
+                return team['teamName']
