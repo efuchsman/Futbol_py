@@ -26,3 +26,8 @@ class TestTeamStats(unittest.TestCase):
         }
 
         self.assertEqual(team_stats.team_info("18"), expected)
+
+    def test_best_season(self):
+        team_stats = TeamStats()
+
+        self.assertEqual(team_stats.best_season("6"), "20132014")
