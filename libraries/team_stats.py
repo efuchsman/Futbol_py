@@ -49,3 +49,29 @@ class TeamStats(GameStats, LeagueStats):
         for season in season_win_percentage_hash:
             if season_win_percentage_hash[season] == best_season:
                 return season
+
+    def worst_season(self, id):
+        season_win_hash = defaultdict(int)
+        season_total_games_hash = defaultdict(int)
+        season_win_percentage_hash = defaultdict(float)
+
+        for game in self.all_game_teams:
+            for season in self.all_games:
+                if game['team_id'] == id and game['game_id'] == season['game_id']:
+                    season_total_games_hash[season['season']] += 1
+                    if game['result'] == "WIN":
+                        season_win_hash[season['season']] += 1
+
+        for season in season_win_hash:
+            season_win_percentage_hash[season] += float(
+                season_win_hash[season]) / float(season_total_games_hash[season])
+
+        worst_season = 1.0
+
+        for season in season_win_percentage_hash:
+            worst_season = min(
+                worst_season, season_win_percentage_hash[season])
+
+        for season in season_win_percentage_hash:
+            if season_win_percentage_hash[season] == worst_season:
+                return season

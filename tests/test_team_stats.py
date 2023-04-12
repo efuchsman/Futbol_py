@@ -31,3 +31,8 @@ class TestTeamStats(unittest.TestCase):
         team_stats = TeamStats()
 
         self.assertEqual(team_stats.best_season("6"), "20132014")
+
+    def test_worst_season(self):
+        team_stats = TeamStats()
+
+        self.assertEqual(team_stats.worst_season("6"), "20142015")
