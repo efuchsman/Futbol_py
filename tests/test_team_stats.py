@@ -36,3 +36,8 @@ class TestTeamStats(unittest.TestCase):
         team_stats = TeamStats()
 
         self.assertEqual(team_stats.worst_season("6"), "20142015")
+
+    def test_average_win_percentage(self):
+        team_stats = TeamStats()
+
+        self.assertEqual(team_stats.average_win_percentage("6"), 0.49)

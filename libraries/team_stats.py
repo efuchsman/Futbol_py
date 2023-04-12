@@ -75,3 +75,14 @@ class TeamStats(GameStats, LeagueStats):
         for season in season_win_percentage_hash:
             if season_win_percentage_hash[season] == worst_season:
                 return season
+
+    def average_win_percentage(self, id):
+        total_wins = 0
+        total_games = 0
+
+        for game in self.all_game_teams:
+            if game['team_id'] == id:
+                total_games += 1
+                if game['result'] == "WIN":
+                    total_wins += 1
+        return round((float(total_wins) / float(total_games)), 2)
