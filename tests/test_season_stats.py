@@ -47,3 +47,12 @@ class TestSeasonStats(unittest.TestCase):
 
         self.assertEqual(season_stats.most_tackles(
             "20142015"), "Seattle Sounders FC")
+
+    def test_least_tackles(self):
+        season_stats = SeasonStats()
+
+        self.assertEqual(season_stats.least_tackles(
+            "20132014"), "Atlanta United")
+
+        self.assertEqual(season_stats.least_tackles(
+            "20142015"), "Orlando City SC")

@@ -4,7 +4,7 @@ from .game_stats import GameStats
 import pdb
 
 
-class SeasonStats(LeagueStats, GameStats):
+class SeasonStats():
 
     def winningest_coach(self, season_id):
         coach_season_wins_hash = defaultdict(int)
@@ -187,6 +187,37 @@ class SeasonStats(LeagueStats, GameStats):
 
         for team in team_season_tackle_hash:
             if team_season_tackle_hash[team] == max_tackles:
+                top_accurate_team += team
+
+        for team in league_stats.all_teams:
+            if team['team_id'] == top_accurate_team:
+                return team['teamName']
+
+    def least_tackles(self, season_id):
+        game_stats = GameStats()
+        league_stats = LeagueStats()
+        team_season_tackle_hash = defaultdict(int)
+
+        season_id_games = []
+
+        for game in game_stats.all_games:
+            if game['season'] == season_id:
+                season_id_games.append(game['game_id'])
+        for id in season_id_games:
+            for game_team in league_stats.all_game_teams:
+                if game_team['game_id'] == id:
+                    team_season_tackle_hash[game_team['team_id']
+                                            ] += int(game_team['tackles'])
+
+        min_tackles = 10000
+
+        for team in team_season_tackle_hash:
+            min_tackles = min(min_tackles, team_season_tackle_hash[team])
+
+        top_accurate_team = ""
+
+        for team in team_season_tackle_hash:
+            if team_season_tackle_hash[team] == min_tackles:
                 top_accurate_team += team
 
         for team in league_stats.all_teams:
