@@ -54,3 +54,5 @@ class TestStatTracker(unittest.TestCase):
         self.assertEqual(stat_tracker.highest_scoring_home_team, "Reign FC")
         self.assertEqual(stat_tracker.lowest_scoring_visitor,
                          "San Jose Earthquakes")
+        self.assertEqual(
+            stat_tracker.lowest_scoring_home_team, "Utah Royals FC")
