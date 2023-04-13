@@ -56,3 +56,9 @@ class TestTeamStats(unittest.TestCase):
         team_stats = TeamStats()
 
         self.assertEqual(team_stats.favorite_opponent("18"), "DC United")
+
+    def test_rival(self):
+        team_stats = TeamStats()
+
+        self.assertIn(team_stats.rival(
+            "18"), ["Houston Dash", "LA Galaxy"])
