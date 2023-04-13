@@ -51,3 +51,8 @@ class TestTeamStats(unittest.TestCase):
         team_stats = TeamStats()
 
         self.assertEqual(team_stats.least_goals("18"), 0)
+
+    def test_favorite_opponent(self):
+        team_stats = TeamStats()
+
+        self.assertEqual(team_stats.favorite_opponent("18"), "DC United")

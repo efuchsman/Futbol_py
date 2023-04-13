@@ -104,3 +104,37 @@ class TeamStats(GameStats, LeagueStats):
                 goals_list.append(game['goals'])
 
         return int(min(goals_list))
+
+    def favorite_opponent(self, id):
+        opponent_wins_hash = defaultdict(int)
+        opponent_total_games_hash = defaultdict(int)
+        opponent_win_percentage_hash = defaultdict(float)
+
+        for game1 in self.all_game_teams:
+            if game1['team_id'] == id:
+                game_id = game1['game_id']
+
+                for game2 in self.all_game_teams:
+                    if game2['game_id'] == game_id and game2['team_id'] != id:
+                        opponent_total_games_hash[game2['team_id']] += 1
+                        if game2['result'] == "LOSS":
+                            opponent_wins_hash[game2['team_id']] += 1
+
+        for opponent in opponent_wins_hash:
+            opponent_win_percentage_hash[opponent] += float(
+                opponent_wins_hash[opponent]) / float(opponent_total_games_hash[opponent])
+
+        max_wins = 0
+
+        for opponent in opponent_win_percentage_hash:
+            max_wins = max(max_wins, opponent_win_percentage_hash[opponent])
+
+        favorite_id = ""
+
+        for opponent in opponent_win_percentage_hash:
+            if opponent_win_percentage_hash[opponent] == max_wins:
+                favorite_id += opponent
+
+        for team in self.all_teams:
+            if team['team_id'] == favorite_id:
+                return team['teamName']
