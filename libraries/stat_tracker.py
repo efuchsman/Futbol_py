@@ -28,3 +28,21 @@ class StatTracker():
         self.highest_scoring_home_team = self.league_stats.highest_scoring_home_team()
         self.lowest_scoring_visitor = self.league_stats.lowest_scoring_visitor()
         self.lowest_scoring_home_team = self.league_stats.lowest_scoring_home_team()
+
+    def team_info(self, id):
+        return self.team_stats.team_info(id)
+
+    def best_season(self, id):
+        return self.team_stats.best_season(id)
+
+    def worst_season(self, id):
+        return self.team_stats.worst_season(id)
+
+    def average_win_percentage(self, id):
+        return self.team_stats.average_win_percentage(id)
+
+    def most_goals_scored(self, id):
+        return self.team_stats.most_goals(id)
+
+    def fewest_goals_scored(self, id):
+        return self.team_stats.fewest_goals_scored(id)

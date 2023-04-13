@@ -56,3 +56,43 @@ class TestStatTracker(unittest.TestCase):
                          "San Jose Earthquakes")
         self.assertEqual(
             stat_tracker.lowest_scoring_home_team, "Utah Royals FC")
+
+    def test_team_info(self):
+
+        stat_tracker = StatTracker()
+
+        expected = {
+            "team_id": "18",
+            "franchise_id": "34",
+            "team_name": "Minnesota United FC",
+            "abbreviation": "MIN",
+            "stadium": "Allianz Field",
+            "link": "/api/v1/teams/18"
+        }
+
+        self.assertEqual(stat_tracker.team_info("18"), expected)
+
+    def test_best_season(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.best_season("6"), "20132014")
+
+    def test_worst_season(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.worst_season("6"), "20142015")
+
+    def test_average_win_percentage(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.average_win_percentage("6"), 0.49)
+
+    def test_most_goals_scored(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.most_goals_scored("18"), 7)
+
+    def test_fewest_goals_scored(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.fewest_goals_scored("18"), 0)
