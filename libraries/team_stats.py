@@ -1,7 +1,6 @@
 from collections import defaultdict
 from .league_stats import LeagueStats
 from .game_stats import GameStats
-import pdb
 
 
 class TeamStats(GameStats, LeagueStats):
@@ -96,7 +95,7 @@ class TeamStats(GameStats, LeagueStats):
 
         return int(max(goals_list))
 
-    def least_goals(self, id):
+    def fewest_goals_scored(self, id):
         goals_list = []
 
         for game in self.all_game_teams:

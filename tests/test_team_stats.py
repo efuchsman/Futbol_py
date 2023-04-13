@@ -47,10 +47,10 @@ class TestTeamStats(unittest.TestCase):
 
         self.assertEqual(team_stats.most_goals("18"), 7)
 
-    def test_least_goals(self):
+    def test_fewest_goals_scored(self):
         team_stats = TeamStats()
 
-        self.assertEqual(team_stats.least_goals("18"), 0)
+        self.assertEqual(team_stats.fewest_goals_scored("18"), 0)
 
     def test_favorite_opponent(self):
         team_stats = TeamStats()
