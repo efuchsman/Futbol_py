@@ -2,6 +2,7 @@ from .league_stats import LeagueStats
 from .game_stats import GameStats
 from .team_stats import TeamStats
 from .season_stats import SeasonStats
+import pdb
 
 
 class StatTracker():
@@ -22,6 +23,7 @@ class StatTracker():
 
         self.count_of_teams = self.league_stats.count_of_teams()
         self.best_offense = self.league_stats.best_offense()
+        self.worst_offense = self.league_stats.worst_offense()
         self.highest_scoring_visitor = self.league_stats.highest_scoring_visitor()
         self.highest_scoring_home_team = self.league_stats.highest_scoring_home_team()
         self.lowest_scoring_visitor = self.league_stats.lowest_scoring_visitor()

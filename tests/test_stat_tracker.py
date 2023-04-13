@@ -49,3 +49,8 @@ class TestStatTracker(unittest.TestCase):
                          expected_average_goals_by_season)
         self.assertEqual(stat_tracker.count_of_teams, 32)
         self.assertEqual(stat_tracker.best_offense, "Reign FC")
+        self.assertEqual(stat_tracker.worst_offense, "Utah Royals FC")
+        self.assertEqual(stat_tracker.highest_scoring_visitor, "FC Dallas")
+        self.assertEqual(stat_tracker.highest_scoring_home_team, "Reign FC")
+        self.assertEqual(stat_tracker.lowest_scoring_visitor,
+                         "San Jose Earthquakes")
