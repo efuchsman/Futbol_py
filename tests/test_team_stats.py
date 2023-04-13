@@ -41,3 +41,8 @@ class TestTeamStats(unittest.TestCase):
         team_stats = TeamStats()
 
         self.assertEqual(team_stats.average_win_percentage("6"), 0.49)
+
+    def test_most_goals(self):
+        team_stats = TeamStats()
+
+        self.assertEqual(team_stats.most_goals("18"), 7)

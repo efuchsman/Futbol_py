@@ -86,3 +86,12 @@ class TeamStats(GameStats, LeagueStats):
                 if game['result'] == "WIN":
                     total_wins += 1
         return round((float(total_wins) / float(total_games)), 2)
+
+    def most_goals(self, id):
+        goals_list = []
+
+        for game in self.all_game_teams:
+            if game['team_id'] == id:
+                goals_list.append(game['goals'])
+
+        return int(max(goals_list))
