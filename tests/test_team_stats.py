@@ -46,3 +46,8 @@ class TestTeamStats(unittest.TestCase):
         team_stats = TeamStats()
 
         self.assertEqual(team_stats.most_goals("18"), 7)
+
+    def test_least_goals(self):
+        team_stats = TeamStats()
+
+        self.assertEqual(team_stats.least_goals("18"), 0)

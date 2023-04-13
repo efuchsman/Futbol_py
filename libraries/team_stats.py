@@ -95,3 +95,12 @@ class TeamStats(GameStats, LeagueStats):
                 goals_list.append(game['goals'])
 
         return int(max(goals_list))
+
+    def least_goals(self, id):
+        goals_list = []
+
+        for game in self.all_game_teams:
+            if game['team_id'] == id:
+                goals_list.append(game['goals'])
+
+        return int(min(goals_list))
