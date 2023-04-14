@@ -3,7 +3,7 @@ from .league_stats import LeagueStats
 from .game_stats import GameStats
 
 
-class SeasonStats(GameStats, LeagueStats):
+class SeasonStats():
     def __init__(self):
         self.game_stats = GameStats()
         self.league_stats = LeagueStats()
