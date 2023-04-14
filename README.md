@@ -17,7 +17,7 @@
 <h2>Testing</h2>
 
 1. To run an individual file: `python3 -m unittest tests/<filename>.py `
-2. To run all of the tests: `python3 -m unittest tests/test_stat_tracker.py `
+2. To run all tests: `python3 -m unittest tests/test_stat_tracker.py `
 
 <article>
           <header>
