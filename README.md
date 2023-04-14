@@ -8,10 +8,7 @@
 
 <article>
           <header>
-            <h1>
-              Statistics
-              <small></small>
-            </h1>
+            <h1 align="center">Statistics</h1>
           </header>
          
 
