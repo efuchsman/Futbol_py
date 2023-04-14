@@ -29,6 +29,24 @@ class StatTracker():
         self.lowest_scoring_visitor = self.league_stats.lowest_scoring_visitor()
         self.lowest_scoring_home_team = self.league_stats.lowest_scoring_home_team()
 
+    def winningest_coach(self, season_id):
+        return self.season_stats.winningest_coach(season_id)
+
+    def worst_coach(self, season_id):
+        return self.season_stats.worst_coach(season_id)
+
+    def most_accurate_team(self, season_id):
+        return self.season_stats.most_accurate_team(season_id)
+
+    def least_accurate_team(self, season_id):
+        return self.season_stats.least_accurate_team(season_id)
+
+    def most_tackles(self, season_id):
+        return self.season_stats.most_tackles(season_id)
+
+    def fewest_tackles(self, season_id):
+        return self.season_stats.least_tackles(season_id)
+
     def team_info(self, id):
         return self.team_stats.team_info(id)
 
@@ -46,3 +64,9 @@ class StatTracker():
 
     def fewest_goals_scored(self, id):
         return self.team_stats.fewest_goals_scored(id)
+
+    def favorite_opponent(self, id):
+        return self.team_stats.favorite_opponent(id)
+
+    def rival(self, id):
+        return self.team_stats.rival(id)

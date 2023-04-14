@@ -57,6 +57,60 @@ class TestStatTracker(unittest.TestCase):
         self.assertEqual(
             stat_tracker.lowest_scoring_home_team, "Utah Royals FC")
 
+    def test_winningest_coach(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.winningest_coach(
+            "20132014"), "Claude Julien")
+
+        self.assertEqual(stat_tracker.winningest_coach(
+            "20142015"), "Alain Vigneault")
+
+    def test_worst_coach(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.worst_coach(
+            "20132014"), "Peter Laviolette")
+
+        self.assertIn(stat_tracker.worst_coach(
+            "20142015"), ["Craig MacTavish", "Ted Nolan"])
+
+    def test_most_accurate_team(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.most_accurate_team(
+            "20132014"), "Real Salt Lake")
+
+        self.assertEqual(stat_tracker.most_accurate_team(
+            "20142015"), "Toronto FC")
+
+    def test_least_accurate_team(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.least_accurate_team(
+            "20132014"), "New York City FC")
+
+        self.assertEqual(stat_tracker.least_accurate_team(
+            "20142015"), "Columbus Crew SC")
+
+    def test_most_tackles(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.most_tackles(
+            "20132014"), "FC Cincinnati")
+
+        self.assertEqual(stat_tracker.most_tackles(
+            "20142015"), "Seattle Sounders FC")
+
+    def test_fewest_tackles(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.fewest_tackles(
+            "20132014"), "Atlanta United")
+
+        self.assertEqual(stat_tracker.fewest_tackles(
+            "20142015"), "Orlando City SC")
+
     def test_team_info(self):
 
         stat_tracker = StatTracker()
@@ -96,3 +150,14 @@ class TestStatTracker(unittest.TestCase):
         stat_tracker = StatTracker()
 
         self.assertEqual(stat_tracker.fewest_goals_scored("18"), 0)
+
+    def test_favorite_opponent(self):
+        stat_tracker = StatTracker()
+
+        self.assertEqual(stat_tracker.favorite_opponent("18"), "DC United")
+
+    def test_rival(self):
+        stat_tracker = StatTracker()
+
+        self.assertIn(stat_tracker.rival(
+            "18"), ["Houston Dash", "LA Galaxy"])
