@@ -6,6 +6,15 @@
   </a>
 </div>
 
+<h2>Project Description</h2>
+
+#### Futbol uses data from a fictional soccer league to analyze team performance for specific seasons and across seasons. It shows who the best and worst performers are, as well as pulls statistics for individual teams. 
+
+<h2>System Requirements</h2>
+
+#### • Python 3
+
+
 <article>
           <header>
             <h1 align="center">Statistics</h1>
